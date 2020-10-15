@@ -1,5 +1,8 @@
 import React from 'react';
 import Link from 'next/link'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faJournalWhills } from "@fortawesome/free-solid-svg-icons"
+import { addToFavorite } from "../../functions"
 
 const PlanetWidget = (props) => {
     const { data } = props
@@ -23,14 +26,20 @@ const PlanetWidget = (props) => {
         return str;
     }
     const slug = string_to_slug(name)
+    const url = `planets/${slug}`
 
     return (
-        <div className="col-3 planetWidgetContainer">
-            <div className="widget">
-                <h3>{name}</h3>
-                <p>Climate: </p>
-                <p>{data.climate}</p>
-                <Link href="/planets/[planet]" as={`planets/${slug}`}>link text</Link>
+        <div className="col-md-4">
+            <div className="planetWidgetContainer">
+                <div className="widget">
+                    <div className="library" onClick={() => addToFavorite(name, url)}>
+                        <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
+                    </div>
+                    <h3>{name}</h3>
+                    <p>Climate: <b>{data.climate}</b></p>
+                    <p>Diameter: <b>{data.diameter}</b></p>
+                    <Link href="/planets/[planet]" as={url}>Read more...</Link>
+                </div>
             </div>
         </div>
     );

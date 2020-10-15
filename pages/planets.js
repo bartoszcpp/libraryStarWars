@@ -7,7 +7,10 @@ const planet = () => {
 
   return (
     <DataProvider>
-      <AllPlanets />
+      <div className="container">
+        <h1>Explore all your favourite planet...</h1>
+        <AllPlanets />
+      </div>
     </DataProvider>
   );
 };
