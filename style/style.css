@@ -1,0 +1,9 @@
+.planetWidgetContainer {
+  margin: 20px 0;
+}
+
+.widget {
+  background-color: rgba(189, 189, 189, 0.637);
+  border-radius: 15px;
+  padding: 20px;
+}
