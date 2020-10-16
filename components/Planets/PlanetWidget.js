@@ -40,9 +40,9 @@ const PlanetWidget = (props) => {
         <div className="col-md-4">
             <div className="planetWidgetContainer">
                 <div className="widget libraryButton">
-                    <div className={`library ${disabled ? "disable" : ""}`} onClick={() => handleOnClick()}>
+                    <button className={`library ${disabled ? "disable" : ""}`} onClick={() => handleOnClick()}>
                         <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
-                    </div>
+                    </button>
                     <h3>{name}</h3>
                     <p>Climate: <b>{data.climate}</b></p>
                     <p>Diameter: <b>{data.diameter}</b></p>

@@ -40,9 +40,9 @@ const SpeciesWidget = (props) => {
         <div className="col-md-4">
             <div className="planetWidgetContainer">
                 <div className="widget libraryButton">
-                    <div className={`library ${disabled ? "disable" : ""}`} onClick={() => handleOnClick()}>
+                    <button className={`library ${disabled ? "disable" : ""}`} onClick={() => handleOnClick()}>
                         <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
-                    </div>
+                    </button>
                     <h3>{name}</h3>
                     <p>Average height: <b>{data.average_height}</b></p>
                     <p>Average lifespan: <b>{data.average_lifespan}</b></p>
