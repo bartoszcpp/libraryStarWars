@@ -202,27 +202,35 @@ function DataProvider({ children }) {
     return (
       <AppContex.Provider value={{ basedUrl, planets, people, starships, species, vehicles, films, library }}>
         <div style={{ backgroundColor: `${color}` }} >
-          <section className="main">
-            <div className="changeSide" onClick={() => handleChangeColor()}>
-              <p>Change your side</p>
-              {/* <FontAwesomeIcon className="socialIcon bigArrow" icon={faShare} /> */}
-              {/* <img className="img-fluid" src={`${side === "dark" ? "darkside.png" : "lightside.png"}`}></img> */}
-              {side === "dark" ?
-                <>
-                  <FontAwesomeIcon className="socialIcon sideIcon" icon={faGalacticRepublic} />
-                  <div ref={wrapperRed} className="svg-fixed">
-                    <FrameRed />
-                  </div>
-                </> :
-                <>
-                  <FontAwesomeIcon className="socialIcon sideIcon" icon={faJediOrder} />
-                  <div ref={wrapperRed} className="svg-fixed">
-                    <FrameBlue />
-                  </div>
-                </>
-              }
+          <main className="main">
+            <div className="navbar">
+              <div className="logo">
+                <a href={basedUrl}>
+                  <img className="img-fluid" src="/logo.png"></img>
+                </a>
+              </div>
+              <div className="changeSide" onClick={() => handleChangeColor()}>
+                <p className="displayNone">Change your side</p>
+                {/* <FontAwesomeIcon className="socialIcon bigArrow" icon={faShare} /> */}
+                {/* <img className="img-fluid" src={`${side === "dark" ? "darkside.png" : "lightside.png"}`}></img> */}
+                {side === "dark" ?
+                  <>
+                    <FontAwesomeIcon className="socialIcon sideIcon" icon={faGalacticRepublic} />
+                    <div ref={wrapperRed} className="svg-fixed">
+                      <FrameRed />
+                    </div>
+                  </> :
+                  <>
+                    <FontAwesomeIcon className="socialIcon sideIcon" icon={faJediOrder} />
+                    <div ref={wrapperRed} className="svg-fixed">
+                      <FrameBlue />
+                    </div>
+                  </>
+                }
 
+              </div>
             </div>
+
             <div className="container">
               <div className="yourLibrary">
                 <Link href="/library">
@@ -234,7 +242,10 @@ function DataProvider({ children }) {
               </div>
             </div>
             {children}
-          </section>
+          </main>
+          <footer>
+            Bartosz Ciąpała - 2020
+            </footer>
         </div>
       </AppContex.Provider>
     );

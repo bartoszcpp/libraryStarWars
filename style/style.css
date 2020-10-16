@@ -176,6 +176,9 @@ a:hover{
   margin-left: auto;
   margin-right: 20px;
 }
+.yourLibrary{
+  margin-bottom: 40px;
+}
 
 .yourLibrary svg{
   font-size: 48px;
@@ -201,6 +204,16 @@ a:hover{
 
 .sideIcon{
   font-size: 60px;
+}
+
+.logo{
+  max-width: 100px;
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
+.navbar{
+  margin-bottom: 100px
 }
 
 
@@ -271,6 +284,19 @@ a:hover{
     margin: 0;
   }
   .arrow, .arrowRight{
+    display: none;
+  }
+
+  .logo{
+    margin-left: 0;
+    max-width: 60px;
+  }
+
+  .changeSide{
+    margin-top: 20px;
+  }
+
+  .displayNone{
     display: none;
   }
 }
