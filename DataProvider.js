@@ -63,7 +63,8 @@ function DataProvider({ children }) {
         object0.push(data.results[i])
       }
       if (data.next) {
-        getDetail0(data.next);
+        const link = `${url}planets/?page=${data.next.match(/\d+/)[0]}`
+        getDetail0(link);
       }
     }
 
@@ -78,7 +79,8 @@ function DataProvider({ children }) {
         object1.push(data.results[i])
       }
       if (data.next) {
-        getDetail1(data.next);
+        const link = `${url}people/?page=${data.next.match(/\d+/)[0]}`
+        getDetail1(link);
       } else {
         setLoad(true)
       }
@@ -95,7 +97,8 @@ function DataProvider({ children }) {
         object2.push(data.results[i])
       }
       if (data.next) {
-        getDetail2(data.next);
+        const link = `${url}starships/?page=${data.next.match(/\d+/)[0]}`
+        getDetail2(link);
       }
     }
 
@@ -110,7 +113,8 @@ function DataProvider({ children }) {
         object3.push(data.results[i])
       }
       if (data.next) {
-        getDetail3(data.next);
+        const link = `${url}species/?page=${data.next.match(/\d+/)[0]}`
+        getDetail3(link);
       }
     }
 
@@ -125,7 +129,8 @@ function DataProvider({ children }) {
         object4.push(data.results[i])
       }
       if (data.next) {
-        getDetail4(data.next);
+        const link = `${url}vehicles/?page=${data.next.match(/\d+/)[0]}`
+        getDetail4(link);
       }
     }
 
@@ -140,7 +145,8 @@ function DataProvider({ children }) {
         object5.push(data.results[i])
       }
       if (data.next) {
-        getDetail5(data.next);
+        const link = `${url}films/?page=${data.next.match(/\d+/)[0]}`
+        getDetail5(link);
       }
     }
 
@@ -150,8 +156,6 @@ function DataProvider({ children }) {
     getDetail3(`${url}species/`);
     getDetail4(`${url}vehicles/`);
     getDetail5(`${url}films/`);
-
-    console.log(object0)
 
     setPlanets(object0)
     setPeople(object1)
