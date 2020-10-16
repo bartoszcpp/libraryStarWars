@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faJournalWhills } from "@fortawesome/free-solid-svg-icons"
+import { faJediOrder } from "@fortawesome/free-brands-svg-icons"
+import { faGalacticRepublic } from "@fortawesome/free-brands-svg-icons"
 import FrameRed from "./public/framered.svg"
 import FrameBlue from "./public/frameblue.svg"
 import gsap from "gsap"
@@ -10,7 +12,7 @@ import Link from 'next/link'
 const AppContex = createContext();
 
 const url = "https://swapi.dev/api/"
-const basedUrl = "http://localhost:3000/"
+const basedUrl = "https://library-star-wars.vercel.app/"
 
 function DataProvider({ children }) {
   const [planets, setPlanets] = useState([]);
@@ -204,14 +206,20 @@ function DataProvider({ children }) {
             <div className="changeSide" onClick={() => handleChangeColor()}>
               <p>Change your side</p>
               {/* <FontAwesomeIcon className="socialIcon bigArrow" icon={faShare} /> */}
-              <img className="img-fluid" src={`${side === "dark" ? "darkside.png" : "lightside.png"}`}></img>
+              {/* <img className="img-fluid" src={`${side === "dark" ? "darkside.png" : "lightside.png"}`}></img> */}
               {side === "dark" ?
-                <div ref={wrapperRed} className="svg-fixed">
-                  <FrameRed />
-                </div> :
-                <div ref={wrapperRed} className="svg-fixed">
-                  <FrameBlue />
-                </div>
+                <>
+                  <FontAwesomeIcon className="socialIcon sideIcon" icon={faGalacticRepublic} />
+                  <div ref={wrapperRed} className="svg-fixed">
+                    <FrameRed />
+                  </div>
+                </> :
+                <>
+                  <FontAwesomeIcon className="socialIcon sideIcon" icon={faJediOrder} />
+                  <div ref={wrapperRed} className="svg-fixed">
+                    <FrameBlue />
+                  </div>
+                </>
               }
 
             </div>

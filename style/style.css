@@ -199,6 +199,10 @@ a:hover{
   height: 190px;
 }
 
+.sideIcon{
+  font-size: 60px;
+}
+
 
 /*-----------------loadnig animation-----------------------*/
 .spinner {
