@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faJournalWhills } from "@fortawesome/free-solid-svg-icons"
+import { addToFavorite } from "../../functions"
 
 const SpeciesWidget = (props) => {
-    const { data } = props
+    const { data, disable } = props
     const name = data.name
+
+    const [disabled, setDisabled] = useState(disable);
 
     function string_to_slug(str) {
         str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -23,14 +28,26 @@ const SpeciesWidget = (props) => {
         return str;
     }
     const slug = string_to_slug(name)
+    const url = `species/${slug}`
+    const category = "species"
+
+    const handleOnClick = () => {
+        addToFavorite(name, url, category)
+        setDisabled(!disabled)
+    }
 
     return (
-        <div className="col-3 planetWidgetContainer">
-            <div className="widget">
-                <h3>{name}</h3>
-                <p>Climate: </p>
-                <p>{data.climate}</p>
-                <Link href="/species/[species]" as={`species/${slug}`}>link text</Link>
+        <div className="col-md-4">
+            <div className="planetWidgetContainer">
+                <div className="widget libraryButton">
+                    <div className={`library ${disabled ? "disable" : ""}`} onClick={() => handleOnClick()}>
+                        <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
+                    </div>
+                    <h3>{name}</h3>
+                    <p>Average height: <b>{data.average_height}</b></p>
+                    <p>Average lifespan: <b>{data.average_lifespan}</b></p>
+                    <Link href="/species/[species]" as={url}>Read more...</Link>
+                </div>
             </div>
         </div>
     );

@@ -7,7 +7,10 @@ const vehicles = () => {
 
   return (
     <DataProvider>
-      <AllVehicles />
+      <div className="container">
+        <h1>Explore all your favourite vehicles...</h1>
+        <AllVehicles />
+      </div>
     </DataProvider>
   );
 };

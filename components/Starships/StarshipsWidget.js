@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faJournalWhills } from "@fortawesome/free-solid-svg-icons"
+import { addToFavorite } from "../../functions"
 
-const PlanetWidget = (props) => {
-    const { data } = props
+const StarshipsWidget = (props) => {
+    const { data, disable } = props
     const name = data.name
+
+    const [disabled, setDisabled] = useState(disable);
 
     function string_to_slug(str) {
         str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -23,17 +28,29 @@ const PlanetWidget = (props) => {
         return str;
     }
     const slug = string_to_slug(name)
+    const url = `starships/${slug}`
+    const category = "starships"
+
+    const handleOnClick = () => {
+        addToFavorite(name, url, category)
+        setDisabled(!disabled)
+    }
 
     return (
-        <div className="col-3 planetWidgetContainer">
-            <div className="widget">
-                <h3>{name}</h3>
-                <p>Climate: </p>
-                <p>{data.climate}</p>
-                <Link href="/starships/[starship]" as={`starships/${slug}`}>link text</Link>
+        <div className="col-md-4">
+            <div className="planetWidgetContainer">
+                <div className="widget libraryButton">
+                    <div className={`library ${disabled ? "disable" : ""}`} onClick={() => handleOnClick()}>
+                        <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
+                    </div>
+                    <h3>{name}</h3>
+                    <p>MGLT: <b>{data.MGLT}</b></p>
+                    <p>Cargo Capacity: <b>{data.cargo_capacity}</b></p>
+                    <Link href="/starships/[starship]" as={url}>Read more...</Link>
+                </div>
             </div>
         </div>
     );
 }
 
-export default PlanetWidget;
+export default StarshipsWidget;

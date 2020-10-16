@@ -7,7 +7,10 @@ const people = () => {
 
   return (
     <DataProvider>
-      <AllPeople />
+      <div className="container">
+        <h1>Explore all your favourite people...</h1>
+        <AllPeople />
+      </div>
     </DataProvider>
   );
 };

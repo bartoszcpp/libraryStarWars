@@ -12,7 +12,6 @@ const people = () => {
     <>
       <DataProvider>
         <PeoplePage name={people} />
-        {people}
       </DataProvider>
     </>
   );

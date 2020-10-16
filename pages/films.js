@@ -7,7 +7,10 @@ const films = () => {
 
   return (
     <DataProvider>
-      <AllFilms />
+      <div className="container">
+        <h1>Explore all your favourite films...</h1>
+        <AllFilms />
+      </div>
     </DataProvider>
   );
 };

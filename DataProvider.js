@@ -1,21 +1,13 @@
 import React, { createContext, useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faShare } from "@fortawesome/free-solid-svg-icons"
-import { faJediOrder } from "@fortawesome/free-brands-svg-icons"
-import { faGalacticRepublic } from "@fortawesome/free-brands-svg-icons"
+import { faJournalWhills } from "@fortawesome/free-solid-svg-icons"
 import FrameRed from "./public/framered.svg"
 import FrameBlue from "./public/frameblue.svg"
 import gsap from "gsap"
+import Link from 'next/link'
 
-
-const PlanetContext = createContext();
-const PeopleContext = createContext();
-const StarshipsContext = createContext();
-const SpeciesContext = createContext();
-const VehiclesContext = createContext();
-const FilmsContext = createContext();
-const UrlContext = createContext();
+const AppContex = createContext();
 
 const url = "https://swapi.dev/api/"
 const basedUrl = "http://localhost:3000/"
@@ -30,6 +22,7 @@ function DataProvider({ children }) {
   const [color, setColor] = useState("#40363a");
   const [side, setSide] = useState("dark");
   const [load, setLoad] = useState(false);
+  const [library, setLibrary] = useState([])
 
   const wrapperRed = useRef(null)
   const wrapperBlue = useRef(null)
@@ -45,39 +38,145 @@ function DataProvider({ children }) {
         setColor("#40363a")
         setSide("dark")
       }
-
-      //   const [element1] = wrapperRed.current.children
-      //   //const [element2] = wrapperBlue.current.children
-
-      //   //const down1 = element1.getElementById("down")
-      //   const up1 = element1.getElementById("up")
-
-      //   //gsap.set([up1], { autoAlpha: 0 })
-
-      //   const tl = gsap.timeline()
-
-      //   tl.to(up1, { left: 100, opacity: 0.5 })
-
     }
-    axios.all([
-      axios.get(`${url}planets/`),
-      axios.get(`${url}people/`),
-      axios.get(`${url}starships/`),
-      axios.get(`${url}species/`),
-      axios.get(`${url}vehicles/`),
-      axios.get(`${url}films/`),
-    ])
-      .then(responseArr => {
-        //this will be executed only when all requests are complete
-        setPlanets(responseArr[0].data)
-        setPeople(responseArr[1].data)
-        setStarships(responseArr[2].data)
-        setSpecies(responseArr[3].data)
-        setVehicles(responseArr[4].data)
-        setFilms(responseArr[5].data)
-        setLoad(true)
-      });
 
+    var object0 = [];
+    var object1 = [];
+    var object2 = [];
+    var object3 = [];
+    var object4 = [];
+    var object5 = [];
+
+    const localLibrary = localStorage.getItem("item")
+    if (localLibrary != undefined) {
+      setLibrary(JSON.parse(localLibrary))
+    }
+
+    function getDetail0(apiURL) {
+      axios.get(apiURL).then(function (response) {
+        showDetail0(response.data);
+      });
+    }
+
+    function showDetail0(data) {
+      for (let i = 0; i < data.results.length; i++) {
+        object0.push(data.results[i])
+      }
+      if (data.next) {
+        getDetail0(data.next);
+      }
+    }
+
+    function getDetail1(apiURL) {
+      axios.get(apiURL).then(function (response) {
+        showDetail1(response.data);
+      });
+    }
+
+    function showDetail1(data) {
+      for (let i = 0; i < data.results.length; i++) {
+        object1.push(data.results[i])
+      }
+      if (data.next) {
+        getDetail1(data.next);
+      } else {
+        setLoad(true)
+      }
+    }
+
+    function getDetail2(apiURL) {
+      axios.get(apiURL).then(function (response) {
+        showDetail2(response.data);
+      });
+    }
+
+    function showDetail2(data) {
+      for (let i = 0; i < data.results.length; i++) {
+        object2.push(data.results[i])
+      }
+      if (data.next) {
+        getDetail2(data.next);
+      }
+    }
+
+    function getDetail3(apiURL) {
+      axios.get(apiURL).then(function (response) {
+        showDetail3(response.data);
+      });
+    }
+
+    function showDetail3(data) {
+      for (let i = 0; i < data.results.length; i++) {
+        object3.push(data.results[i])
+      }
+      if (data.next) {
+        getDetail3(data.next);
+      }
+    }
+
+    function getDetail4(apiURL) {
+      axios.get(apiURL).then(function (response) {
+        showDetail4(response.data);
+      });
+    }
+
+    function showDetail4(data) {
+      for (let i = 0; i < data.results.length; i++) {
+        object4.push(data.results[i])
+      }
+      if (data.next) {
+        getDetail4(data.next);
+      }
+    }
+
+    function getDetail5(apiURL) {
+      axios.get(apiURL).then(function (response) {
+        showDetail5(response.data);
+      });
+    }
+
+    function showDetail5(data) {
+      for (let i = 0; i < data.results.length; i++) {
+        object5.push(data.results[i])
+      }
+      if (data.next) {
+        getDetail5(data.next);
+      }
+    }
+
+    getDetail0(`${url}planets/`);
+    getDetail1(`${url}people/`);
+    getDetail2(`${url}starships/`);
+    getDetail3(`${url}species/`);
+    getDetail4(`${url}vehicles/`);
+    getDetail5(`${url}films/`);
+
+    console.log(object0)
+
+    setPlanets(object0)
+    setPeople(object1)
+    setStarships(object2)
+    setSpecies(object3)
+    setVehicles(object4)
+    setFilms(object5)
+
+    // axios.all([
+    //   axios.get(`${url}planets/`),
+    //   axios.get(`${url}people/`),
+    //   axios.get(`${url}starships/`),
+    //   axios.get(`${url}species/`),
+    //   axios.get(`${url}vehicles/`),
+    //   axios.get(`${url}films/`),
+    // ])
+    //   .then(responseArr => {
+    //     setPlanets(responseArr[0].data)
+    //     setPeople(responseArr[1].data)
+    //     setStarships(responseArr[2].data)
+    //     setSpecies(responseArr[3].data)
+    //     setVehicles(responseArr[4].data)
+    //     setFilms(responseArr[5].data)
+    //     setLoad(true)
+    //   });
   }, []);
 
   const handleChangeColor = () => {
@@ -95,48 +194,60 @@ function DataProvider({ children }) {
 
   if (load) {
     return (
-      <UrlContext.Provider value={basedUrl} >
-        <PlanetContext.Provider value={planets}>
-          <PeopleContext.Provider value={people} >
-            <StarshipsContext.Provider value={starships} >
-              <SpeciesContext.Provider value={species} >
-                <VehiclesContext.Provider value={vehicles} >
-                  <FilmsContext.Provider value={films} >
-                    {/* <UserDispatchContext.Provider value={setUserDetails}> */}
-                    <div style={{ backgroundColor: `${color}` }} >
-                      <section className="main">
-                        <div className="changeSide" onClick={() => handleChangeColor()}>
-                          <p>Change your side</p>
-                          {/* <FontAwesomeIcon className="socialIcon bigArrow" icon={faShare} /> */}
-                          <img className="img-fluid" src={`${side === "dark" ? "darkside.png" : "lightside.png"}`}></img>
-                          {side === "dark" ?
-                            <div ref={wrapperRed} className="svg-fixed">
-                              <FrameRed />
-                            </div> :
-                            <div ref={wrapperRed} className="svg-fixed">
-                              <FrameBlue />
-                            </div>
-                          }
+      <AppContex.Provider value={{ basedUrl, planets, people, starships, species, vehicles, films, library }}>
+        <div style={{ backgroundColor: `${color}` }} >
+          <section className="main">
+            <div className="changeSide" onClick={() => handleChangeColor()}>
+              <p>Change your side</p>
+              {/* <FontAwesomeIcon className="socialIcon bigArrow" icon={faShare} /> */}
+              <img className="img-fluid" src={`${side === "dark" ? "darkside.png" : "lightside.png"}`}></img>
+              {side === "dark" ?
+                <div ref={wrapperRed} className="svg-fixed">
+                  <FrameRed />
+                </div> :
+                <div ref={wrapperRed} className="svg-fixed">
+                  <FrameBlue />
+                </div>
+              }
 
-                        </div>
-                        {children}
-                      </section>
-                    </div>
-                    {/* </UserDispatchContext.Provider> */}
-                  </FilmsContext.Provider>
-                </VehiclesContext.Provider>
-              </SpeciesContext.Provider>
-            </StarshipsContext.Provider>
-          </PeopleContext.Provider>
-        </PlanetContext.Provider>
-      </UrlContext.Provider >
+            </div>
+            <div className="container">
+              <div className="yourLibrary">
+                <Link href="/library">
+                  <div>
+                    <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
+                    <p>Your Library</p>
+                  </div>
+                </Link>
+              </div>
+            </div>
+            {children}
+          </section>
+        </div>
+      </AppContex.Provider>
     );
   } else {
     return (
       <>
-        <div>loading...</div>
-        <div ref={wrapperRed} className="svg-fixed">
-          <FrameRed />
+        <div style={{ backgroundColor: `${color}` }} >
+          <section className="main">
+            <div class="spinner">
+              <div className="rect1"></div>
+              <div className="rect2"></div>
+              <div className="rect3"></div>
+              <div className="rect4"></div>
+              <div className="rect5"></div>
+            </div>
+            {side === "dark" ?
+              <div ref={wrapperRed} className="svg-fixed">
+                <FrameRed />
+              </div> :
+              <div ref={wrapperRed} className="svg-fixed">
+                <FrameBlue />
+              </div>
+
+            }
+          </section>
         </div>
       </>
     )
@@ -145,4 +256,4 @@ function DataProvider({ children }) {
 
 }
 
-export { DataProvider, PlanetContext, PeopleContext, StarshipsContext, SpeciesContext, VehiclesContext, FilmsContext, UrlContext };
+export { DataProvider, AppContex };

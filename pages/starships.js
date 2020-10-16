@@ -7,7 +7,10 @@ const starships = () => {
 
   return (
     <DataProvider>
-      <AllStarships />
+      <div className="container">
+        <h1>Explore all your favourite starships...</h1>
+        <AllStarships />
+      </div>
     </DataProvider>
   );
 };

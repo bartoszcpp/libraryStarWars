@@ -1,16 +1,10 @@
 import React from 'react';
-import { PlanetContext } from '../../DataProvider';
-import { FilmsContext } from '../../DataProvider';
-import { PeopleContext } from '../../DataProvider';
-import { UrlContext } from '../../DataProvider';
-
+import { AppContex } from '../../DataProvider';
 
 const PlanetPage = (props) => {
     const { name } = props;
-    const data = React.useContext(PlanetContext);
-    const dataFilms = React.useContext(FilmsContext);
-    const dataPeople = React.useContext(PeopleContext);
-    const basedUrl = React.useContext(UrlContext);
+    const { planets, films, people, basedUrl } = React.useContext(AppContex);
+    const data = planets
 
     function string_to_slug(str) {
         str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -31,8 +25,7 @@ const PlanetPage = (props) => {
     }
 
     if (data != undefined) {
-        console.log(data)
-        var planetObject = data.results.find(data => {
+        var planetObject = data.find(data => {
             let slugName = string_to_slug(data.name)
             return (slugName === name)
         })
@@ -41,7 +34,7 @@ const PlanetPage = (props) => {
     if (planetObject != undefined) {
 
         var listOfFilms = planetObject.films.map((film, index) => {
-            let data = dataFilms.results.find(dataFilm => dataFilm.url === film);
+            let data = films.find(dataFilm => dataFilm.url === film);
             let slugTitle = string_to_slug(data.title)
             console.log(slugTitle)
             return (
@@ -51,10 +44,8 @@ const PlanetPage = (props) => {
             )
         })
 
-        console.log(planetObject)
-
-        var listOfPeople = planetObject.residents.map((people, index) => {
-            let data = dataPeople.results.find(dataPeople => dataPeople.url === people);
+        var listOfPeople = planetObject.residents.map((planet, index) => {
+            let data = people.find(dataPeople => dataPeople.url === planet);
             console.log(data)
             if (data != undefined) {
                 let slugName = string_to_slug(data.name)
@@ -101,11 +92,11 @@ const PlanetPage = (props) => {
     } else {
         return (
             <div class="spinner">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
+                <div className="rect1"></div>
+                <div className="rect2"></div>
+                <div className="rect3"></div>
+                <div className="rect4"></div>
+                <div className="rect5"></div>
             </div>
         )
     }

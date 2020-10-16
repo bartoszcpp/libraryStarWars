@@ -16,7 +16,7 @@ export default function Home() {
       <div className="container">
         <h1>Welcome to the largest Star Wars library!</h1>
         <h2 className="titleH">May the force be with you</h2>
-        <div className="widget">
+        <div className="widget widgetExampleContainer">
           <h2>Short guide</h2>
           <div onClick={() => setExpand(!expand)}>
             <FontAwesomeIcon className={`socialIcon ${expand ? "deg90" : "deg270"}`} icon={faReply} />
@@ -26,7 +26,7 @@ export default function Home() {
               <div className="col-md-4">
                 <div className="planetWidgetContainer">
                   <div className="widgetExample">
-                    <div className="library" onClick={() => addToFavorite(name, url)}>
+                    <div className="library">
                       <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
                     </div>
                     <h3>Tatooine</h3>
@@ -39,7 +39,7 @@ export default function Home() {
               <div className="col-md-8">
                 <div className="planetWidgetContainer">
                   <FontAwesomeIcon className="socialIcon arrow" icon={faReply} />
-                  <p>Click this book to add a fragment to your favorites</p>
+                  <p>Click this book to add a fragment to your library</p>
                 </div>
               </div>
             </div>

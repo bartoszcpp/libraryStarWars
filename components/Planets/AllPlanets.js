@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { PlanetContext } from '../../DataProvider';
+import { AppContex } from '../../DataProvider';
 import PlanetWidget from "./PlanetWidget";
 
 
 const AllPlanets = () => {
-    const data = React.useContext(PlanetContext);
+    const { planets, library } = React.useContext(AppContex);
+    const data = planets
     const [word, setWord] = useState("");
     const [listOfPlanets, setListOfPlanets] = useState([]);
 
@@ -27,19 +28,24 @@ const AllPlanets = () => {
     }
 
     useEffect(() => {
-        if (data != undefined) {
-            let value = data.results.map((data, index) => {
+        if (data != undefined && library != undefined) {
+
+            let value = data.map((data, index) => {
                 if (string_to_slug(data.name).indexOf(string_to_slug(word)) >= 0) {
+                    const isInLibrary = library.findIndex(library => library.name === data.name)
+                    if (isInLibrary > -1) {
+                        var disable = true
+                    } else {
+                        var disable = false
+                    }
                     return (
-                        <PlanetWidget key={index} data={data} />
+                        <PlanetWidget key={index} data={data} disable={disable} />
                     )
                 }
             })
             setListOfPlanets(value)
         }
     }, [word]);
-
-
 
     return (
         <>

@@ -1,9 +1,10 @@
 import React from 'react';
-import { VehiclesContext } from '../../DataProvider';
+import { AppContex } from '../../DataProvider';
 
 const VehiclesPage = (props) => {
     const { name } = props;
-    const data = React.useContext(VehiclesContext);
+    const { vehicles, films, basedUrl } = React.useContext(AppContex);
+    const data = vehicles
 
     function string_to_slug(str) {
         str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -24,18 +25,65 @@ const VehiclesPage = (props) => {
     }
 
     if (data != undefined) {
-        console.log(data)
-        var VehiclesObject = data.results.find(data => {
+        var vehiclesObject = data.find(data => {
             let slugName = string_to_slug(data.name)
             return (slugName === name)
         })
     }
 
-    return (
-        <>
-            <p>{VehiclesObject.name}</p>
-        </>
-    );
+    if (vehiclesObject != undefined) {
+
+        var listOfFilms = vehiclesObject.films.map((film, index) => {
+            let data = films.find(dataFilm => dataFilm.url === film);
+            let slugTitle = string_to_slug(data.title)
+            return (
+                <p key={index}>
+                    <a href={`${basedUrl}films/${slugTitle}`}>{data.title}</a>
+                </p >
+            )
+        })
+
+        return (
+            <>
+                <div className='container'>
+                    <div className="object">
+                        <h1>{vehiclesObject.name}</h1>
+                        <div className="row">
+                            <div className="col-md-4">
+                                <h2>Data: </h2>
+                                <p>Cargo capacity: <b>{vehiclesObject.cargo_capacity}</b></p>
+                                <p>Consumables: <b>{vehiclesObject.consumables}</b></p>
+                                <p>Cost in credits: <b>{vehiclesObject.cost_in_credits}</b></p>
+                                <p>Crew: <b>{vehiclesObject.crew}</b></p>
+                                <p>Length: <b>{vehiclesObject.length}</b></p>
+                                <p>Manufacturer: <b>{vehiclesObject.manufacturer}</b></p>
+                                <p>Max atmosphering speed: <b>{vehiclesObject.max_atmosphering_speed}</b></p>
+                                <p>Model: <b>{vehiclesObject.model}</b></p>
+                                <p>Passengers: <b>{vehiclesObject.passengers}</b></p>
+                                <p>Vehicle class: <b>{vehiclesObject.vehicle_class}</b></p>
+                            </div>
+                            <div className="col-md-4">
+                                <h2>Films: </h2>
+                                {listOfFilms}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+
+    } else {
+        return (
+            <div class="spinner">
+                <div className="rect1"></div>
+                <div className="rect2"></div>
+                <div className="rect3"></div>
+                <div className="rect4"></div>
+                <div className="rect5"></div>
+            </div>
+        )
+    }
 }
 
 export default VehiclesPage;

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faJournalWhills } from "@fortawesome/free-solid-svg-icons"
 import { addToFavorite } from "../../functions"
 
 const PlanetWidget = (props) => {
-    const { data } = props
+    const { data, disable } = props
     const name = data.name
+
+    const [disabled, setDisabled] = useState(disable);
 
     function string_to_slug(str) {
         str = str.replace(/^\s+|\s+$/g, ''); // trim
@@ -27,12 +29,18 @@ const PlanetWidget = (props) => {
     }
     const slug = string_to_slug(name)
     const url = `planets/${slug}`
+    const category = "planets"
+
+    const handleOnClick = () => {
+        addToFavorite(name, url, category)
+        setDisabled(!disabled)
+    }
 
     return (
         <div className="col-md-4">
             <div className="planetWidgetContainer">
-                <div className="widget">
-                    <div className="library" onClick={() => addToFavorite(name, url)}>
+                <div className="widget libraryButton">
+                    <div className={`library ${disabled ? "disable" : ""}`} onClick={() => handleOnClick()}>
                         <FontAwesomeIcon className="socialIcon" icon={faJournalWhills} />
                     </div>
                     <h3>{name}</h3>

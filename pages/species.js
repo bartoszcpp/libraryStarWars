@@ -7,7 +7,10 @@ const species = () => {
 
   return (
     <DataProvider>
-      <AllSpecies />
+      <div className="container">
+        <h1>Explore all your favourite species...</h1>
+        <AllSpecies />
+      </div>
     </DataProvider>
   );
 };

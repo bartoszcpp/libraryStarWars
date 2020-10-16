@@ -1,22 +1,23 @@
-export const addToFavorite = (name, url) => {
+
+export const addToFavorite = (name, url, category) => {
     const object = localStorage.getItem("item")
-    // if (object === null) {
-    //     const newObject = { "name": name, "url": url }
-    //     localStorage.setItem("item", JSON.stringify(newObject))
+    if (object === null) {
+        const newObject = [{ "name": name, "url": url, "category": category }]
+        localStorage.setItem("item", JSON.stringify(newObject))
 
-    // } else {
-    //     const parseObject = JSON.parse(object)
-    //     parseObject.map()
-    //     //const newObject = parseObject.push({ "name": name, "url": url })
-    //     const newObject = [parseObject, { "name": name, "url": url }]
-
-    //     // const newObject1 = [...parseObject, newObject]
-    //     localStorage.setItem("item", JSON.stringify(newObject))
-    //     console.log(parseObject)
-
-
-    // }
+    } else {
+        const parseObject = JSON.parse(object)
+        const isInStorage = parseObject.findIndex(object => object.name === name)
+        if (isInStorage === -1) {
+            const newObject = { "name": name, "url": url, "category": category }
+            parseObject.push(newObject)
+            localStorage.setItem("item", JSON.stringify(parseObject))
+        } else {
+            parseObject.splice(isInStorage, 1)
+            localStorage.setItem("item", JSON.stringify(parseObject))
+        }
+    }
     console.log(object)
 
-    localStorage.clear()
+    //localStorage.clear()
 }

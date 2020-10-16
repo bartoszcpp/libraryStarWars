@@ -12,7 +12,6 @@ const films = () => {
     <>
       <DataProvider>
         <FilmsPage title={films} />
-        {films}
       </DataProvider>
     </>
   );
