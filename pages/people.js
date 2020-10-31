@@ -1,10 +1,8 @@
-import React from 'react';
-import AllPeople from '../components/People/AllPeople';
-import { DataProvider } from '../DataProvider';
-
+import React from "react";
+import AllPeople from "../components/People/AllPeople";
+import { DataProvider } from "../DataProvider";
 
 const people = () => {
-
   return (
     <DataProvider>
       <div className="container">

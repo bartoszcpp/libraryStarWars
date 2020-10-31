@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from "react";
 import { useRouter } from "next/router";
-import SpeciesPage from '../../components/Species/SpeciesPage';
-import { DataProvider } from '../../DataProvider';
-
+import SpeciesPage from "../../components/Species/SpeciesPage";
+import { DataProvider } from "../../DataProvider";
 
 const species = () => {
   const router = useRouter();

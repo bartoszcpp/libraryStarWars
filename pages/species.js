@@ -1,10 +1,8 @@
-import React from 'react';
-import AllSpecies from "../components/Species/AllSpecies"
-import { DataProvider } from '../DataProvider';
-
+import React from "react";
+import AllSpecies from "../components/Species/AllSpecies";
+import { DataProvider } from "../DataProvider";
 
 const species = () => {
-
   return (
     <DataProvider>
       <div className="container">

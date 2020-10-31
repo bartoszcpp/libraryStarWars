@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 import { useRouter } from "next/router";
-import FilmsPage from '../../components/Films/FilmsPage';
-import { DataProvider } from '../../DataProvider';
-
+import FilmsPage from "../../components/Films/FilmsPage";
+import { DataProvider } from "../../DataProvider";
 
 const films = () => {
   const router = useRouter();

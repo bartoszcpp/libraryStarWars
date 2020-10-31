@@ -1,10 +1,8 @@
-import React from 'react';
-import AllVehicles from "../components/Vehicles/AllVehicles"
-import { DataProvider } from '../DataProvider';
-
+import React from "react";
+import AllVehicles from "../components/Vehicles/AllVehicles";
+import { DataProvider } from "../DataProvider";
 
 const vehicles = () => {
-
   return (
     <DataProvider>
       <div className="container">

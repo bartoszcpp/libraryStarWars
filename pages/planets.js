@@ -1,10 +1,8 @@
-import React from 'react';
-import AllPlanets from "../components/Planets/AllPlanets"
-import { DataProvider } from '../DataProvider';
-
+import React from "react";
+import AllPlanets from "../components/Planets/AllPlanets";
+import { DataProvider } from "../DataProvider";
 
 const planet = () => {
-
   return (
     <DataProvider>
       <div className="container">

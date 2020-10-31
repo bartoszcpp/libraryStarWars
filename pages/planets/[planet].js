@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from "react";
 import { useRouter } from "next/router";
-import PlanetPage from '../../components/Planets/PlanetPage';
-import { DataProvider } from '../../DataProvider';
-
+import PlanetPage from "../../components/Planets/PlanetPage";
+import { DataProvider } from "../../DataProvider";
 
 const planet = () => {
   const router = useRouter();
